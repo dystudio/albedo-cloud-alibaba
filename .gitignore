@@ -32,7 +32,7 @@ nbdist/
 target/
 *.war
 *.ear
-*.zip
+target/*.zip
 *.tar
 *.tar.gz
 
