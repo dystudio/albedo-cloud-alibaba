@@ -1,6 +1,0 @@
-com/albedo/java/auth/endpoint/AlbedoTokenEndpoint.class
-com/albedo/java/auth/config/WebSecurityConfigurer.class
-com/albedo/java/auth/AlbedoAuthApplication.class
-com/albedo/java/auth/config/AuthorizationServerConfig.class
-com/albedo/java/auth/handler/AuthenticationFailureEvenHandler.class
-com/albedo/java/auth/handler/AuthenticationSuccessEventHandler.class

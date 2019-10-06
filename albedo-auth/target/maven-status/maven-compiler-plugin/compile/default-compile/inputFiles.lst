@@ -1,6 +1,0 @@
-/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-auth/src/main/java/com/albedo/java/auth/config/AuthorizationServerConfig.java
-/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-auth/src/main/java/com/albedo/java/auth/endpoint/AlbedoTokenEndpoint.java
-/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-auth/src/main/java/com/albedo/java/auth/handler/AuthenticationSuccessEventHandler.java
-/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-auth/src/main/java/com/albedo/java/auth/AlbedoAuthApplication.java
-/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-auth/src/main/java/com/albedo/java/auth/config/WebSecurityConfigurer.java
-/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-auth/src/main/java/com/albedo/java/auth/handler/AuthenticationFailureEvenHandler.java
