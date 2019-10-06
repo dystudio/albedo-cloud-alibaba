@@ -39,6 +39,6 @@ public interface RemoteLogOperateService {
 	 * @param from       内部调用标志
 	 * @return succes、false
 	 */
-	@PostMapping("/log-operate/")
-	R saveLog(@RequestBody LogOperate logOperate, @RequestHeader(SecurityConstants.FROM) String from);
+	@PostMapping("/log-operate/save")
+	R save(@RequestBody LogOperate logOperate, @RequestHeader(SecurityConstants.FROM) String from);
 }

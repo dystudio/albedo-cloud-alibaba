@@ -65,6 +65,9 @@
 		</filter>
 	</appender>
 
+
+	<logger name="com.alibaba.nacos" level="WARN"/>
+	<logger name="org.springframework.security" level="TRACE"/>
 	<logger name="org.springframework" level="INFO"/>
 	<!-- Level: FATAL 0  ERROR 3  WARN 4  INFO 6  DEBUG 7 -->
 	<root level="INFO">

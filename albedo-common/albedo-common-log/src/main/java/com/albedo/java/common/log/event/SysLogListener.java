@@ -40,6 +40,6 @@ public class SysLogListener {
 	@EventListener(SysLogEvent.class)
 	public void saveSysLog(SysLogEvent event) {
 		LogOperate logOperate = (LogOperate) event.getSource();
-		remoteLogOperateService.saveLog(logOperate, SecurityConstants.FROM_IN);
+		remoteLogOperateService.save(logOperate, SecurityConstants.FROM_IN);
 	}
 }

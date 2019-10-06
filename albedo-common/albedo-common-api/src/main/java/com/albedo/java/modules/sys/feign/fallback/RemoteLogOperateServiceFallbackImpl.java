@@ -41,7 +41,7 @@ public class RemoteLogOperateServiceFallbackImpl implements RemoteLogOperateServ
 	 * @return succes、false
 	 */
 	@Override
-	public R saveLog(LogOperate logOperate, String from) {
+	public R save(LogOperate logOperate, String from) {
 		RemoteLogOperateServiceFallbackImpl.log.error("feign 插入日志失败", cause);
 		return null;
 	}
