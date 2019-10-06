@@ -1,0 +1,50 @@
+server:
+  port: 5002
+
+logging:
+  level:
+    ROOT: ${logback.loglevel}
+    com.albedo.java: DEBUG
+
+spring:
+  application:
+    name: albedo-zipkin
+  profiles:
+    active: ${spring.profiles.active}
+  # 配置中心
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+  main:
+    allow-bean-definition-overriding: true
+
+
+
+---
+
+# 开发配置
+spring:
+  profiles: dev
+
+  cloud:
+    nacos:
+      config:
+        ext-config:
+          - data-id: application-dev.yml
+            refresh: true
+
+---
+# 生产配置
+spring:
+  profiles: prod
+
+  cloud:
+    nacos:
+      config:
+        ext-config:
+          - data-id: application-prod.yml
+            refresh: true

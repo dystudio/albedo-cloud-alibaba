@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="albedo-common-core" />
+        <module name="albedo-gen" />
+        <module name="albedo-zipkin" />
+        <module name="albedo-common-security" />
+        <module name="albedo-sentinel" />
+        <module name="albedo-sys" />
+        <module name="albedo-gateway" />
+        <module name="albedo-monitor" />
+        <module name="albedo-swagger-api" />
+        <module name="albedo-common-api" />
+        <module name="albedo-data-mybatis" />
+        <module name="albedo-common-module" />
+        <module name="albedo-common-log" />
+        <module name="albedo-auth" />
+        <module name="albedo-quartz" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="albedo-auth" target="1.8" />
+      <module name="albedo-cloud-alibaba" target="1.8" />
+      <module name="albedo-common" target="1.8" />
+      <module name="albedo-common-api" target="1.8" />
+      <module name="albedo-common-core" target="1.8" />
+      <module name="albedo-common-log" target="1.8" />
+      <module name="albedo-common-module" target="1.8" />
+      <module name="albedo-common-security" target="1.8" />
+      <module name="albedo-config" target="1.8" />
+      <module name="albedo-data-mybatis" target="1.8" />
+      <module name="albedo-eureka" target="1.8" />
+      <module name="albedo-gateway" target="1.8" />
+      <module name="albedo-gen" target="1.8" />
+      <module name="albedo-modules" target="1.8" />
+      <module name="albedo-monitor" target="1.8" />
+      <module name="albedo-nacos" target="1.8" />
+      <module name="albedo-nacos-config" target="1.8" />
+      <module name="albedo-nacos-discovery" target="1.8" />
+      <module name="albedo-nacos-gateway" target="1.8" />
+      <module name="albedo-plugins" target="1.8" />
+      <module name="albedo-quartz" target="1.8" />
+      <module name="albedo-sentinel" target="1.8" />
+      <module name="albedo-swagger-api" target="1.8" />
+      <module name="albedo-sys" target="1.8" />
+      <module name="albedo-zipkin" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

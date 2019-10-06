@@ -1,0 +1,11 @@
+[
+  {
+    "resource": "albedo-auth"
+  },
+  {
+    "resource": "albedo-sys"
+  },
+  {
+    "resource": "albedo-gen"
+  }
+]

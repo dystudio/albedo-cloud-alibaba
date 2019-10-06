@@ -1,0 +1,13 @@
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/filter/ValidateCodeGatewayFilter.java
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/filter/PasswordDecoderFilter.java
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/config/KaptchaConfiguration.java
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/config/RouterFunctionConfiguration.java
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/handler/SwaggerResourceHandler.java
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/handler/SwaggerSecurityHandler.java
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/AlbedoGatewayApplication.java
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/handler/SwaggerUiHandler.java
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/filter/PigRequestGlobalFilter.java
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/handler/HystrixFallbackHandler.java
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/config/RegistrySwaggerResourcesProvider.java
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/handler/ImageCodeHandler.java
+/Users/somewhere/IdeaProjects/albedo-cloud-alibaba/albedo-gateway/src/main/java/com/albedo/java/gateway/config/RateLimiterConfiguration.java
