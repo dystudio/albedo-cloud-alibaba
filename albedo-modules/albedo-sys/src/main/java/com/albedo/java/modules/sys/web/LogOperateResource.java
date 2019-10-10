@@ -55,7 +55,7 @@ public class LogOperateResource {
 	 * @return
 	 */
 	@Inner
-	@PostMapping
+	@PostMapping("/")
 	public R save(@Valid @RequestBody  LogOperate logOperate) {
 		logOperateService.save(logOperate);
 		return R.buildOk("操作成功");

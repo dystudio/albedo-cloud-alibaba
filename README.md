@@ -16,8 +16,18 @@
 
     
 
-   
-![](https://images.gitee.com/uploads/images/2019/0330/065147_85756aea_410595.png)   
+![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-20-37.png)   
+![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-21-13.png)   
+![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-22-00.png)   
+![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-22-14.png)   
+![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-22-36.png)   
+![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-22-57.png)   
+![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-23-22.png)   
+![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-23-35.png)   
+![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-24-07.png)   
+![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-24-21.png)   
+![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-24-41.png)   
+![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-24-54.png)   
 
 #### 核心依赖 
 
