@@ -73,7 +73,7 @@ albedo
 
 1. 启动前安装服务mysql/redis/nacos注册中心
 2. 导入db/albedo-cloud
-3. 浏览器访问[nacos](http://localhost:8848])导入nacos-config/nacos_config_export_2019-10-10 10_56_24.zip配置
+3. 浏览器访问[nacos](http://localhost:8848)导入nacos-config/nacos_config_export_2019-10-10 10_56_24.zip配置
 4. 启动AlbedoAuthApplication、AlbedoSysApplication、AlbedoGenApplication、AlbedoQuartzApplication、AlbedoMonitorApplication、AlbedoSentinelApplication、AlbedoZipkinApplication、AlbedoGatewayApplication
 5. 启动前端[albedi-ui](https://github.com/somowhere/albedo-ui) 访问[localhost](http://localhost:4000)
 
