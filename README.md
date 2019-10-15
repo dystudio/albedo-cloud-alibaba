@@ -14,7 +14,15 @@
 - 提供对常见容器化支持 Docker、Kubernetes、Rancher2 支持  
 - 提供 lambda 、stream api 、webflux 的生产实践   
 
-    
+#### 快速开始
+
+1. 启动前安装服务mysql/redis/[nacos](https://github.com/alibaba/nacos)注册中心
+2. 导入db/albedo-cloud
+3. 浏览器访问本地[nacos](http://localhost:8848)导入nacos-config/nacos_config_export_2019-10-10 10_56_24.zip配置
+4. 启动AlbedoAuthApplication、AlbedoSysApplication、AlbedoGenApplication、AlbedoQuartzApplication、AlbedoMonitorApplication、AlbedoSentinelApplication、AlbedoZipkinApplication、AlbedoGatewayApplication
+5. 启动前端[albedi-ui](https://github.com/somowhere/albedo-ui) 访问[localhost](http://localhost:4000)
+
+#### 系统预览
 
 ![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-20-37.png)   
 ![](https://raw.githubusercontent.com/somowhere/albedo-source/master/albedo-cloud/Snipaste_2019-10-10_10-21-13.png)   
@@ -68,14 +76,6 @@ albedo
      └── albedo-swagger-api -- swagger api
 	 
 ```
-
-#### 快速开始
-
-1. 启动前安装服务mysql/redis/[nacos](https://github.com/alibaba/nacos)注册中心
-2. 导入db/albedo-cloud
-3. 浏览器访问本地[nacos](http://localhost:8848)导入nacos-config/nacos_config_export_2019-10-10 10_56_24.zip配置
-4. 启动AlbedoAuthApplication、AlbedoSysApplication、AlbedoGenApplication、AlbedoQuartzApplication、AlbedoMonitorApplication、AlbedoSentinelApplication、AlbedoZipkinApplication、AlbedoGatewayApplication
-5. 启动前端[albedi-ui](https://github.com/somowhere/albedo-ui) 访问[localhost](http://localhost:4000)
 
 #### 提交反馈
 
