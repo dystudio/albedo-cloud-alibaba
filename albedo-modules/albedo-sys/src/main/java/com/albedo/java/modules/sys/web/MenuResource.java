@@ -26,11 +26,13 @@ import com.albedo.java.common.core.vo.PageModel;
 import com.albedo.java.common.core.vo.TreeQuery;
 import com.albedo.java.common.log.annotation.Log;
 import com.albedo.java.common.log.enums.BusinessType;
-import com.albedo.java.common.security.annotation.Inner;
 import com.albedo.java.common.security.util.SecurityUtil;
 import com.albedo.java.common.web.resource.TreeVoResource;
 import com.albedo.java.modules.sys.domain.Menu;
-import com.albedo.java.modules.sys.domain.vo.*;
+import com.albedo.java.modules.sys.domain.vo.MenuDataSortVo;
+import com.albedo.java.modules.sys.domain.vo.MenuDataVo;
+import com.albedo.java.modules.sys.domain.vo.MenuTree;
+import com.albedo.java.modules.sys.domain.vo.MenuVo;
 import com.albedo.java.modules.sys.service.MenuService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.google.common.collect.Lists;
@@ -217,17 +219,5 @@ public class MenuResource extends TreeVoResource<MenuService, MenuDataVo> {
 		return R.buildOkData(service.findRelationPage(pm));
 	}
 
-	/**
-	 * 新增代码生成菜单
-	 *
-	 * @param schemeDataVo 菜单信息
-	 * @return success/false
-	 */
-	@Inner
-	@PostMapping("/gen")
-	public R saveByGenScheme(@Valid @RequestBody GenSchemeDataVo schemeDataVo) {
-		service.saveByGenScheme(schemeDataVo);
-		return R.buildOk("操作成功");
-	}
 
 }

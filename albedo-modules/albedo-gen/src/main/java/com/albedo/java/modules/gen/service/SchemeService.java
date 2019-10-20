@@ -4,6 +4,7 @@ import com.albedo.java.common.core.vo.PageModel;
 import com.albedo.java.common.persistence.service.DataVoService;
 import com.albedo.java.modules.gen.domain.Scheme;
 import com.albedo.java.modules.gen.domain.vo.SchemeDataVo;
+import com.albedo.java.modules.gen.domain.vo.SchemeGenDataVo;
 import com.albedo.java.modules.gen.repository.SchemeRepository;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
@@ -26,4 +27,6 @@ public interface SchemeService extends DataVoService<SchemeRepository, Scheme, S
 	IPage getSchemeVoPage(PageModel pm);
 
 	Map<String, Object> previewCode(String id, String username);
+
+	SchemeDataVo genMenu(SchemeGenDataVo schemeGenDataVo);
 }

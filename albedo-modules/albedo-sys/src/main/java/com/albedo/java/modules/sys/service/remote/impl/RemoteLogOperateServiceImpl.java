@@ -14,35 +14,30 @@
  * limitations under the License.
  */
 
-package com.albedo.java.modules.sys.feign.fallback;
+package com.albedo.java.modules.sys.service.remote.impl;
 
-import com.albedo.java.common.core.util.R;
 import com.albedo.java.modules.sys.domain.LogOperate;
-import com.albedo.java.modules.sys.feign.RemoteLogOperateService;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
+import com.albedo.java.modules.sys.dubbo.RemoteLogOperateService;
+import com.albedo.java.modules.sys.service.LogOperateService;
+import lombok.AllArgsConstructor;
+import org.apache.dubbo.config.annotation.Service;
 
 /**
+ * <p>
+ * 日志表 服务实现类
+ * </p>
+ *
  * @author somowhere
- * @date 2019/2/1
+ * @since 2019/2/1
  */
-@Slf4j
-@Component
-public class RemoteLogOperateServiceFallbackImpl implements RemoteLogOperateService {
-	@Setter
-	private Throwable cause;
+@Service(protocol = "dubbo")
+@AllArgsConstructor
+public class RemoteLogOperateServiceImpl implements RemoteLogOperateService {
 
-	/**
-	 * 保存日志
-	 *
-	 * @param logOperate 日志实体
-	 * @param from       内部调用标志
-	 * @return succes、false
-	 */
+	private final LogOperateService logOperateService;
+
 	@Override
-	public R save(LogOperate logOperate, String from) {
-		RemoteLogOperateServiceFallbackImpl.log.error("feign 插入日志失败", cause);
-		return null;
+	public boolean save(LogOperate logOperate) {
+		return logOperateService.save(logOperate);
 	}
 }

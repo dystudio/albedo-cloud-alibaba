@@ -14,24 +14,30 @@
  * limitations under the License.
  */
 
-package com.albedo.java.modules.sys.feign.factory;
+package com.albedo.java.modules.sys.service.remote.impl;
 
-import com.albedo.java.modules.sys.feign.RemoteMenuService;
-import com.albedo.java.modules.sys.feign.fallback.RemoteMenuServiceFallbackImpl;
-import feign.hystrix.FallbackFactory;
-import org.springframework.stereotype.Component;
+import com.albedo.java.modules.sys.domain.vo.UserInfo;
+import com.albedo.java.modules.sys.dubbo.RemoteUserService;
+import com.albedo.java.modules.sys.service.UserService;
+import lombok.AllArgsConstructor;
+import org.apache.dubbo.config.annotation.Service;
 
 /**
+ * <p>
+ * 日志表 服务实现类
+ * </p>
+ *
  * @author somowhere
- * @date 2019/2/1
+ * @since 2019/2/1
  */
-@Component
-public class RemoteMenuServiceFallbackFactory implements FallbackFactory<RemoteMenuService> {
+@Service(protocol = "dubbo")
+@AllArgsConstructor
+public class RemoteUserServiceImpl implements RemoteUserService {
+
+	private final UserService userService;
 
 	@Override
-	public RemoteMenuService create(Throwable throwable) {
-		RemoteMenuServiceFallbackImpl remoteMenuServiceFallback = new RemoteMenuServiceFallbackImpl();
-		remoteMenuServiceFallback.setCause(throwable);
-		return remoteMenuServiceFallback;
+	public UserInfo getUserInfo(String username) {
+		return userService.getUserInfo(username);
 	}
 }

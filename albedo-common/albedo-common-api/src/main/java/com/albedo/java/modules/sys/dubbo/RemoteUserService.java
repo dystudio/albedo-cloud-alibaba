@@ -14,24 +14,21 @@
  * limitations under the License.
  */
 
-package com.albedo.java.modules.sys.feign.factory;
+package com.albedo.java.modules.sys.dubbo;
 
-import com.albedo.java.modules.sys.feign.RemoteTokenService;
-import com.albedo.java.modules.sys.feign.fallback.RemoteTokenServiceFallbackImpl;
-import feign.hystrix.FallbackFactory;
-import org.springframework.stereotype.Component;
+import com.albedo.java.modules.sys.domain.vo.UserInfo;
 
 /**
  * @author somowhere
  * @date 2019/2/1
  */
-@Component
-public class RemoteTokenServiceFallbackFactory implements FallbackFactory<RemoteTokenService> {
+public interface RemoteUserService {
+	/**
+	 * 通过用户名查询用户、角色信息
+	 *
+	 * @param username 用户名
+	 * @return R
+	 */
+	UserInfo getUserInfo(String username);
 
-	@Override
-	public RemoteTokenService create(Throwable throwable) {
-		RemoteTokenServiceFallbackImpl remoteTokenServiceFallback = new RemoteTokenServiceFallbackImpl();
-		remoteTokenServiceFallback.setCause(throwable);
-		return remoteTokenServiceFallback;
-	}
 }

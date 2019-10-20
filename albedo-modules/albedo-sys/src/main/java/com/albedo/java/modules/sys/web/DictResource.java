@@ -31,13 +31,14 @@ import com.albedo.java.common.log.enums.BusinessType;
 import com.albedo.java.common.security.annotation.Inner;
 import com.albedo.java.common.web.resource.TreeVoResource;
 import com.albedo.java.modules.sys.domain.Dict;
-import com.albedo.java.modules.sys.service.DictService;
 import com.albedo.java.modules.sys.domain.vo.DictDataVo;
 import com.albedo.java.modules.sys.domain.vo.UserDataVo;
+import com.albedo.java.modules.sys.service.DictService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.ApiOperation;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -145,17 +146,5 @@ public class DictResource extends TreeVoResource<DictService, DictDataVo> {
 		return new R<>(service.removeByIds(Lists.newArrayList(ids.split(StringUtil.SPLIT_DEFAULT))));
 	}
 
-
-	/**
-	 * 所有类型字典
-	 *
-	 * @return 所有类型字典
-	 */
-	@Inner
-	@GetMapping("/all")
-	public R<String> getAll() {
-		List<Dict> list = service.list(Wrappers.emptyWrapper());
-		return new R<>(Json.toJsonString(list));
-	}
 
 }

@@ -20,13 +20,12 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.albedo.java.common.core.constant.CommonConstants;
 import com.albedo.java.common.core.constant.SecurityConstants;
-import com.albedo.java.common.core.util.R;
 import com.albedo.java.modules.sys.domain.User;
-import com.albedo.java.modules.sys.feign.RemoteUserService;
 import com.albedo.java.modules.sys.domain.vo.UserInfo;
-import lombok.AllArgsConstructor;
+import com.albedo.java.modules.sys.dubbo.RemoteUserService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,6 +35,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -48,10 +48,12 @@ import java.util.Set;
  */
 @Slf4j
 @Service
-@AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
-	private final RemoteUserService remoteUserService;
-	private final CacheManager cacheManager;
+
+	@Reference
+	private RemoteUserService remoteUserService;
+	@Resource
+	private CacheManager cacheManager;
 
 
 	/**
@@ -68,8 +70,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			return (UserDetail) cache.get(username).get();
 		}
 
-		R<UserInfo> result = remoteUserService.info(username, SecurityConstants.FROM_IN);
-		UserDetails userDetails = getUserDetails(result);
+		UserDetails userDetails = getUserDetails(remoteUserService.getUserInfo(username));
 		cache.put(username, userDetails);
 		return userDetails;
 	}
@@ -77,15 +78,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	/**
 	 * 构建userdetails
 	 *
-	 * @param result 用户信息
+	 * @param info 用户信息
 	 * @return
 	 */
-	private UserDetails getUserDetails(R<UserInfo> result) {
-		if (result == null || result.getData() == null) {
+	private UserDetails getUserDetails(UserInfo info) {
+		if (info == null) {
 			throw new UsernameNotFoundException("用户不存在");
 		}
 
-		UserInfo info = result.getData();
 		Set<String> dbAuthsSet = new HashSet<>();
 		if (ArrayUtil.isNotEmpty(info.getRoles())) {
 			// 获取角色

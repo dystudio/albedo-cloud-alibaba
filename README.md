@@ -2,7 +2,7 @@
   <img src="https://img.shields.io/badge/Avue-2.0.6-green.svg" alt="Build Status">
    <img src="https://img.shields.io/badge/Spring%20Cloud-Greenwich.SR2-blue.svg" alt="Coverage Status">
    <img src="https://img.shields.io/badge/Spring%20Cloud%20Alibaba-2.1.0.RELEASE-blue.svg" alt="Coverage Status">
-   <img src="https://img.shields.io/badge/Spring%20Boot-2.1.8.RELEASE-blue.svg" alt="Downloads">
+   <img src="https://img.shields.io/badge/Spring%20Boot-2.1.9.RELEASE-blue.svg" alt="Downloads">
  </p>  
  
 **albedo-cloud-alibaba Microservice Architecture**
@@ -42,12 +42,12 @@
 
 依赖 | 版本
 ---|---
-Spring Boot |  2.1.8.RELEASE  
+Spring Boot |  2.1.9.RELEASE  
 Spring Cloud | Greenwich.SR2   
 Spring Cloud Alibaba | 2.1.0.RELEASE
 Spring Security OAuth2 | 2.3.5
 Mybatis Plus | 3.2.0
-hutool | 4.5.16
+hutool | 4.5.18
 Avue | 2.0.6
    
 

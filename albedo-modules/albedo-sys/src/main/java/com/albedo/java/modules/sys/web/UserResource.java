@@ -25,15 +25,14 @@ import com.albedo.java.common.core.util.StringUtil;
 import com.albedo.java.common.core.vo.PageModel;
 import com.albedo.java.common.log.annotation.Log;
 import com.albedo.java.common.log.enums.BusinessType;
-import com.albedo.java.common.security.annotation.Inner;
 import com.albedo.java.common.security.util.SecurityUtil;
 import com.albedo.java.common.util.ExcelUtil;
 import com.albedo.java.common.web.resource.DataVoResource;
 import com.albedo.java.modules.sys.domain.User;
-import com.albedo.java.modules.sys.service.UserService;
 import com.albedo.java.modules.sys.domain.vo.UserDataVo;
 import com.albedo.java.modules.sys.domain.vo.UserExcelVo;
 import com.albedo.java.modules.sys.domain.vo.UserVo;
+import com.albedo.java.modules.sys.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.google.common.collect.Lists;
@@ -84,22 +83,6 @@ public class UserResource extends DataVoResource<UserService, UserDataVo> {
 			.lambda().eq(User::getUsername, username));
 		if (user == null) {
 			return new R<>(Boolean.FALSE, "获取当前用户信息失败");
-		}
-		return new R<>(service.getUserInfo(user));
-	}
-
-	/**
-	 * 获取指定用户全部信息
-	 *
-	 * @return 用户信息
-	 */
-	@Inner
-	@GetMapping("/info/{username}")
-	public R info(@PathVariable String username) {
-		User user = service.getOne(Wrappers.<User>query()
-			.lambda().eq(User::getUsername, username));
-		if (user == null) {
-			return new R<>(Boolean.FALSE, String.format("用户信息为空 %s", username));
 		}
 		return new R<>(service.getUserInfo(user));
 	}

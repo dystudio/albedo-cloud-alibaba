@@ -14,24 +14,31 @@
  * limitations under the License.
  */
 
-package com.albedo.java.modules.sys.feign.factory;
+package com.albedo.java.modules.sys.service.remote.impl;
 
-import com.albedo.java.modules.sys.feign.RemoteDictService;
-import com.albedo.java.modules.sys.feign.fallback.RemoteDictServiceFallbackImpl;
-import feign.hystrix.FallbackFactory;
-import org.springframework.stereotype.Component;
+import com.albedo.java.modules.sys.domain.vo.GenSchemeDataVo;
+import com.albedo.java.modules.sys.dubbo.RemoteMenuService;
+import com.albedo.java.modules.sys.service.MenuService;
+import lombok.AllArgsConstructor;
+import org.apache.dubbo.config.annotation.Service;
 
 /**
+ * <p>
+ * 日志表 服务实现类
+ * </p>
+ *
  * @author somowhere
- * @date 2019/2/1
+ * @since 2019/2/1
  */
-@Component
-public class RemoteDictServiceFallbackFactory implements FallbackFactory<RemoteDictService> {
+@Service(protocol = "dubbo")
+@AllArgsConstructor
+public class RemoteMenuServiceImpl implements RemoteMenuService {
+
+	private final MenuService menuService;
 
 	@Override
-	public RemoteDictService create(Throwable throwable) {
-		RemoteDictServiceFallbackImpl remoteDictServiceFallback = new RemoteDictServiceFallbackImpl();
-		remoteDictServiceFallback.setCause(throwable);
-		return remoteDictServiceFallback;
+	public boolean saveByGenScheme(GenSchemeDataVo schemeDataVo) {
+
+	return menuService.saveByGenScheme(schemeDataVo);
 	}
 }

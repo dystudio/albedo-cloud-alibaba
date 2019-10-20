@@ -55,7 +55,7 @@ mybatis-plus:
 application:
   developMode: true
   address-enabled: true
-  logPath: target/.logs
+  logPath: target/logs
   static-file-directory: D:/albedo-cloud-file
   cors: #By default CORS are not enabled. Uncomment to enable.
     allowed-origins: "*"

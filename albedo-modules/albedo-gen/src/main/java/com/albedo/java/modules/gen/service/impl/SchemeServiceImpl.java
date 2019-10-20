@@ -1,5 +1,6 @@
 package com.albedo.java.modules.gen.service.impl;
 
+import cn.hutool.core.util.CharUtil;
 import com.albedo.java.common.core.util.CollUtil;
 import com.albedo.java.common.core.util.FreeMarkers;
 import com.albedo.java.common.core.util.StringUtil;
@@ -12,21 +13,22 @@ import com.albedo.java.common.persistence.service.impl.DataVoServiceImpl;
 import com.albedo.java.modules.gen.domain.Scheme;
 import com.albedo.java.modules.gen.domain.Table;
 import com.albedo.java.modules.gen.domain.TableColumn;
-import com.albedo.java.modules.gen.domain.vo.SchemeDataVo;
-import com.albedo.java.modules.gen.domain.vo.SchemeVo;
-import com.albedo.java.modules.gen.domain.vo.TableDataVo;
-import com.albedo.java.modules.gen.domain.vo.TemplateVo;
+import com.albedo.java.modules.gen.domain.vo.*;
 import com.albedo.java.modules.gen.domain.xml.GenConfig;
 import com.albedo.java.modules.gen.repository.SchemeRepository;
-import com.albedo.java.modules.gen.repository.TableRepository;
+import com.albedo.java.modules.gen.service.TableColumnService;
+import com.albedo.java.modules.gen.service.TableService;
 import com.albedo.java.modules.gen.util.GenUtil;
 import com.albedo.java.modules.sys.domain.Dict;
+import com.albedo.java.modules.sys.domain.vo.GenSchemeDataVo;
+import com.albedo.java.modules.sys.dubbo.RemoteMenuService;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -42,14 +44,15 @@ import java.util.stream.Collectors;
 @Service
 public class SchemeServiceImpl extends DataVoServiceImpl<SchemeRepository, Scheme, String, SchemeDataVo> implements com.albedo.java.modules.gen.service.SchemeService {
 
-	private final TableRepository tableRepository;
-	private final TableServiceImpl tableServiceImpl;
-	private final TableColumnServiceImpl tableColumnServiceImpl;
+	private final TableService tableService;
+	private final TableColumnService tableColumnService;
+	@Reference(check = false)
+	private RemoteMenuService remoteMenuService;
 
-	public SchemeServiceImpl(TableRepository tableRepository, TableServiceImpl tableServiceImpl, TableColumnServiceImpl tableColumnServiceImpl) {
-		this.tableRepository = tableRepository;
-		this.tableServiceImpl = tableServiceImpl;
-		this.tableColumnServiceImpl = tableColumnServiceImpl;
+	public SchemeServiceImpl(TableService tableService,
+							 TableColumnService tableColumnService) {
+		this.tableService = tableService;
+		this.tableColumnService = tableColumnService;
 	}
 
 	@Override
@@ -66,10 +69,10 @@ public class SchemeServiceImpl extends DataVoServiceImpl<SchemeRepository, Schem
 		StringBuilder result = new StringBuilder();
 
 		// 查询主表及字段列
-		TableDataVo tableDataVo = tableServiceImpl.findOneVo(schemeDataVo.getTableId());
-		tableDataVo.setColumnList(tableColumnServiceImpl.findAll(new QueryWrapper<TableColumn>().eq(TableColumn.F_SQL_GENTABLEID,
+		TableDataVo tableDataVo = tableService.findOneVo(schemeDataVo.getTableId());
+		tableDataVo.setColumnList(tableColumnService.findAll(new QueryWrapper<TableColumn>().eq(TableColumn.F_SQL_GENTABLEID,
 			tableDataVo.getId()))
-			.stream().map(item -> tableColumnServiceImpl.copyBeanToVo(item)).collect(Collectors.toList())
+			.stream().map(item -> tableColumnService.copyBeanToVo(item)).collect(Collectors.toList())
 		);
 		Collections.sort(tableDataVo.getColumnList());
 
@@ -82,8 +85,8 @@ public class SchemeServiceImpl extends DataVoServiceImpl<SchemeRepository, Schem
 
 		// 如果有子表模板，则需要获取子表列表
 		if (childTableTemplateList.size() > 0) {
-			tableDataVo.setChildList(tableRepository.findAllByParentTable(tableDataVo.getId())
-				.stream().map(item -> tableServiceImpl.copyBeanToVo(item)).collect(Collectors.toList()));
+			tableDataVo.setChildList(tableService.findAllByParentTable(tableDataVo.getId())
+				.stream().map(item -> tableService.copyBeanToVo(item)).collect(Collectors.toList()));
 		}
 
 		// 生成子表模板代码
@@ -129,7 +132,7 @@ public class SchemeServiceImpl extends DataVoServiceImpl<SchemeRepository, Schem
 		map.put("categoryList", CollUtil.convertComboDataList(config.getCategoryList(), Dict.F_VAL, Dict.F_NAME));
 		map.put("viewTypeList", CollUtil.convertComboDataList(config.getViewTypeList(), Dict.F_VAL, Dict.F_NAME));
 
-		List<Table> tableList = tableServiceImpl.findAll(), list = Lists.newArrayList();
+		List<Table> tableList = tableService.findAll(), list = Lists.newArrayList();
 		List<String> tableIds = Lists.newArrayList();
 		if (StringUtil.isNotEmpty(schemeDataVo.getId())) {
 			List<Scheme> schemeList = findAll(schemeDataVo.getId());
@@ -157,10 +160,10 @@ public class SchemeServiceImpl extends DataVoServiceImpl<SchemeRepository, Schem
 		Map<String, Object> result = Maps.newHashMap();
 		SchemeDataVo schemeDataVo = super.findOneVo(id);
 		// 查询主表及字段列
-		TableDataVo tableDataVo = tableServiceImpl.findOneVo(schemeDataVo.getTableId());
-		tableDataVo.setColumnList(tableColumnServiceImpl.findAll(new QueryWrapper<TableColumn>().eq(TableColumn.F_SQL_GENTABLEID,
+		TableDataVo tableDataVo = tableService.findOneVo(schemeDataVo.getTableId());
+		tableDataVo.setColumnList(tableColumnService.findAll(new QueryWrapper<TableColumn>().eq(TableColumn.F_SQL_GENTABLEID,
 			tableDataVo.getId()))
-			.stream().map(item -> tableColumnServiceImpl.copyBeanToVo(item)).collect(Collectors.toList())
+			.stream().map(item -> tableColumnService.copyBeanToVo(item)).collect(Collectors.toList())
 		);
 		Collections.sort(tableDataVo.getColumnList());
 
@@ -173,8 +176,8 @@ public class SchemeServiceImpl extends DataVoServiceImpl<SchemeRepository, Schem
 
 		// 如果有子表模板，则需要获取子表列表
 		if (childTableTemplateList.size() > 0) {
-			tableDataVo.setChildList(tableRepository.findAllByParentTable(tableDataVo.getId())
-				.stream().map(item -> tableServiceImpl.copyBeanToVo(item)).collect(Collectors.toList()));
+			tableDataVo.setChildList(tableService.findAllByParentTable(tableDataVo.getId())
+				.stream().map(item -> tableService.copyBeanToVo(item)).collect(Collectors.toList()));
 		}
 
 		// 生成子表模板代码
@@ -200,6 +203,20 @@ public class SchemeServiceImpl extends DataVoServiceImpl<SchemeRepository, Schem
 			result.put(FreeMarkers.renderString(tpl.getFileName(), model), content);
 		}
 		return result;
+	}
+
+	@Override
+	public SchemeDataVo genMenu(SchemeGenDataVo schemeGenDataVo) {
+		SchemeDataVo schemeDataVo = super.findOneVo(schemeGenDataVo.getId());
+		TableDataVo tableDataVo = schemeDataVo.getTableDataVo();
+		if (tableDataVo == null) {
+			tableDataVo = tableService.findOneVo(schemeDataVo.getTableId());
+		}
+		String url = StringUtil.toAppendStr("/", StringUtil.lowerCase(schemeDataVo.getModuleName()), (StringUtil.isNotBlank(schemeDataVo.getSubModuleName()) ? "/" + StringUtil.lowerCase(schemeDataVo.getSubModuleName()) : ""), "/",
+			StringUtil.toRevertCamelCase(StringUtil.lowerFirst(tableDataVo.getClassName()), CharUtil.DASHED), "/");
+		remoteMenuService.saveByGenScheme(new GenSchemeDataVo(schemeDataVo.getName(),
+			schemeGenDataVo.getParentMenuId(), url, tableDataVo.getClassName()));
+		return  schemeDataVo;
 	}
 
 

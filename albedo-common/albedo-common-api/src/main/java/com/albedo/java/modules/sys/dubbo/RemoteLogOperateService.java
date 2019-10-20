@@ -14,31 +14,20 @@
  * limitations under the License.
  */
 
-package com.albedo.java.modules.sys.feign;
+package com.albedo.java.modules.sys.dubbo;
 
-import com.albedo.java.common.core.constant.SecurityConstants;
-import com.albedo.java.common.core.constant.ServiceNameConstants;
-import com.albedo.java.common.core.util.R;
 import com.albedo.java.modules.sys.domain.LogOperate;
-import com.albedo.java.modules.sys.feign.factory.RemoteLogOperateServiceFallbackFactory;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 /**
  * @author somowhere
  * @date 2019/2/1
  */
-@FeignClient(contextId = "remoteLogService", value = ServiceNameConstants.UMPS_SERVICE, fallbackFactory = RemoteLogOperateServiceFallbackFactory.class)
 public interface RemoteLogOperateService {
 	/**
 	 * 保存日志
 	 *
 	 * @param logOperate 日志实体
-	 * @param from       内部调用标志
 	 * @return succes、false
 	 */
-	@PostMapping("/log-operate/")
-	R save(@RequestBody LogOperate logOperate, @RequestHeader(SecurityConstants.FROM) String from);
+	boolean save(LogOperate logOperate);
 }

@@ -16,6 +16,7 @@
 
 package com.albedo.java.common.security.component;
 
+import com.alibaba.cloud.dubbo.annotation.DubboTransported;
 import lombok.SneakyThrows;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -35,6 +36,7 @@ public class ResourceServerAutoConfiguration {
 	@Bean
 	@Primary
 	@LoadBalanced
+	@DubboTransported
 	public RestTemplate lbRestTemplate() {
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.setErrorHandler(new DefaultResponseErrorHandler() {

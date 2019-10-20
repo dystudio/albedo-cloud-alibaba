@@ -56,7 +56,7 @@ mybatis-plus:
 application:
   developMode: true
   jedisKeyPrefix: albedoBootWebApp
-  logPath: target/.logs
+  logPath: target/logs
   cors: #By default CORS are not enabled. Uncomment to enable.
     allowed-origins: "*"
     allowed-methods: "*"

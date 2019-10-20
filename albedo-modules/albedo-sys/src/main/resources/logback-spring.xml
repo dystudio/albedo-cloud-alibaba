@@ -17,9 +17,9 @@
 
 <configuration debug="false" scan="false">
 	<springProperty scope="context" name="application.logPath" source="application.logPath"
-					defaultValue="target/.logOperate"/>
+					defaultValue="target/logs"/>
 	<springProperty scope="context" name="spring.application.name" source="spring.application.name" defaultValue=""/>
-	<property name="logOperate.path" value="${application.logPath}/${spring.application.name}"/>
+	<property name="application.logPath" value="${application.logPath}/${spring.application.name}"/>
 	<!-- 彩色日志格式 -->
 	<property name="CONSOLE_LOG_PATTERN"
 			  value="${CONSOLE_LOG_PATTERN:-%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
@@ -38,9 +38,9 @@
 
 	<!-- Log file debug output -->
 	<appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${logOperate.path}/debug.logOperate</file>
+		<file>${application.logPath}/debug.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<fileNamePattern>${logOperate.path}/%d{yyyy-MM, aux}/debug.%d{yyyy-MM-dd}.%i.logOperate.gz</fileNamePattern>
+			<fileNamePattern>${application.logPath}/%d{yyyy-MM, aux}/debug.%d{yyyy-MM-dd}.%i.logOperate.gz</fileNamePattern>
 			<maxFileSize>50MB</maxFileSize>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -51,9 +51,9 @@
 
 	<!-- Log file error output -->
 	<appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${logOperate.path}/error.logOperate</file>
+		<file>${application.logPath}/error.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<fileNamePattern>${logOperate.path}/%d{yyyy-MM}/error.%d{yyyy-MM-dd}.%i.logOperate.gz</fileNamePattern>
+			<fileNamePattern>${application.logPath}/%d{yyyy-MM}/error.%d{yyyy-MM-dd}.%i.logOperate.gz</fileNamePattern>
 			<maxFileSize>50MB</maxFileSize>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -65,10 +65,10 @@
 		</filter>
 	</appender>
 
-	<logger name="org.springframework.security" level="TRACE"/>
+	<logger name="com.alibaba.nacos" level="WARN"/>
 	<logger name="org.springframework" level="INFO"/>
 	<!-- Level: FATAL 0  ERROR 3  WARN 4  INFO 6  DEBUG 7 -->
-	<root level="INFO">
+	<root level="DEBUG">
 		<appender-ref ref="console"/>
 		<appender-ref ref="debug"/>
 		<appender-ref ref="error"/>

@@ -16,6 +16,7 @@ import com.albedo.java.modules.gen.domain.vo.TableFormVo;
 import com.albedo.java.modules.gen.domain.vo.TableQuery;
 import com.albedo.java.modules.gen.domain.xml.GenConfig;
 import com.albedo.java.modules.gen.repository.TableRepository;
+import com.albedo.java.modules.gen.service.TableColumnService;
 import com.albedo.java.modules.gen.util.GenUtil;
 import com.albedo.java.modules.sys.domain.Dict;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -41,7 +42,7 @@ public class TableServiceImpl extends
 	DataVoServiceImpl<TableRepository, Table, String, TableDataVo> implements com.albedo.java.modules.gen.service.TableService {
 
 	@Autowired
-	private TableColumnServiceImpl tableColumnServiceImpl;
+	private TableColumnService tableColumnService;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -67,7 +68,7 @@ public class TableServiceImpl extends
 				item.setTableId(table.getId());
 			}
 		} else {
-			List<TableColumn> tableColumnEntities = tableColumnServiceImpl.findAll(new QueryWrapper<TableColumn>().eq(TableColumn.F_SQL_GENTABLEID, table.getId()));
+			List<TableColumn> tableColumnEntities = tableColumnService.findAll(new QueryWrapper<TableColumn>().eq(TableColumn.F_SQL_GENTABLEID, table.getId()));
 			for (TableColumn item : table.getColumnFormList()) {
 				for (TableColumn tableColumn : tableColumnEntities) {
 					if (tableColumn.getId().equals(item.getId())) {
@@ -78,7 +79,7 @@ public class TableServiceImpl extends
 			}
 		}
 
-		tableColumnServiceImpl.saveOrUpdateBatch(table.getColumnFormList());
+		tableColumnService.saveOrUpdateBatch(table.getColumnFormList());
 
 	}
 
@@ -88,11 +89,11 @@ public class TableServiceImpl extends
 		if (table != null) {
 			if (ObjectUtil.isNotEmpty(form.getColumnFormList())) {
 				table.setColumnFormList(form.getColumnFormList().stream()
-					.map(item -> tableColumnServiceImpl.copyVoToBean(item)).collect(Collectors.toList()));
+					.map(item -> tableColumnService.copyVoToBean(item)).collect(Collectors.toList()));
 			}
 			if (ObjectUtil.isNotEmpty(form.getColumnList())) {
 				table.setColumnList(form.getColumnList().stream()
-					.map(item -> tableColumnServiceImpl.copyVoToBean(item)).collect(Collectors.toList()));
+					.map(item -> tableColumnService.copyVoToBean(item)).collect(Collectors.toList()));
 			}
 		}
 	}
@@ -103,11 +104,11 @@ public class TableServiceImpl extends
 		if (table != null) {
 			if (ObjectUtil.isNotEmpty(table.getColumnFormList())) {
 				result.setColumnFormList(table.getColumnFormList().stream()
-					.map(item -> tableColumnServiceImpl.copyBeanToVo(item)).collect(Collectors.toList()));
+					.map(item -> tableColumnService.copyBeanToVo(item)).collect(Collectors.toList()));
 			}
 			if (ObjectUtil.isNotEmpty(table.getColumnList())) {
 				result.setColumnList(table.getColumnList().stream()
-					.map(item -> tableColumnServiceImpl.copyBeanToVo(item)).collect(Collectors.toList()));
+					.map(item -> tableColumnService.copyBeanToVo(item)).collect(Collectors.toList()));
 			}
 		}
 	}
@@ -234,8 +235,8 @@ public class TableServiceImpl extends
 		TableDataVo tableDataVo = new TableDataVo(tableFormVo);
 		if (ObjectUtil.isNotEmpty(tableFormVo.getId())) {
 			tableDataVo = findOneVo(tableFormVo.getId());
-			tableDataVo.setColumnList(tableColumnServiceImpl.findAll(new QueryWrapper<TableColumn>().eq(TableColumn.F_SQL_GENTABLEID, tableFormVo.getId()))
-				.stream().map(item -> tableColumnServiceImpl.copyBeanToVo(item)).collect(Collectors.toList())
+			tableDataVo.setColumnList(tableColumnService.findAll(new QueryWrapper<TableColumn>().eq(TableColumn.F_SQL_GENTABLEID, tableFormVo.getId()))
+				.stream().map(item -> tableColumnService.copyBeanToVo(item)).collect(Collectors.toList())
 			);
 		}
 		// 获取物理表字段
@@ -264,8 +265,13 @@ public class TableServiceImpl extends
 			Table entity = repository.selectById(id);
 			Assert.notNull(entity, "对象 " + id + " 信息为空，删除失败");
 			deleteById(id);
-			tableColumnServiceImpl.deleteByTableId(id, currentAuditor);
+			tableColumnService.deleteByTableId(id, currentAuditor);
 			log.debug("Deleted TableDataVo: {}", entity);
 		});
+	}
+
+	@Override
+	public List<Table> findAllByParentTable(String id) {
+		return repository.findAllByParentTable(id);
 	}
 }

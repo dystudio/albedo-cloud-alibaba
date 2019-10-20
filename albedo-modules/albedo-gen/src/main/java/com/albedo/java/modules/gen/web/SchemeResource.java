@@ -1,9 +1,7 @@
 package com.albedo.java.modules.gen.web;
 
 import cn.hutool.core.lang.Assert;
-import cn.hutool.core.util.CharUtil;
 import com.albedo.java.common.core.constant.CommonConstants;
-import com.albedo.java.common.core.constant.SecurityConstants;
 import com.albedo.java.common.core.util.ResultBuilder;
 import com.albedo.java.common.core.util.StringUtil;
 import com.albedo.java.common.core.vo.PageModel;
@@ -14,11 +12,7 @@ import com.albedo.java.common.web.resource.DataVoResource;
 import com.albedo.java.modules.gen.domain.vo.GenCodeVo;
 import com.albedo.java.modules.gen.domain.vo.SchemeDataVo;
 import com.albedo.java.modules.gen.domain.vo.SchemeGenDataVo;
-import com.albedo.java.modules.gen.domain.vo.TableDataVo;
 import com.albedo.java.modules.gen.service.SchemeService;
-import com.albedo.java.modules.gen.service.TableService;
-import com.albedo.java.modules.sys.feign.RemoteMenuService;
-import com.albedo.java.modules.sys.domain.vo.GenSchemeDataVo;
 import com.google.common.collect.Lists;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,15 +31,10 @@ import java.util.Map;
 @RequestMapping(value = "/scheme")
 public class SchemeResource extends DataVoResource<SchemeService, SchemeDataVo> {
 
-	private final TableService tableService;
 
-	private final RemoteMenuService remoteMenuService;
 
-	public SchemeResource(SchemeService schemeService, TableService tableService,
-						  RemoteMenuService remoteMenuService) {
+	public SchemeResource(SchemeService schemeService) {
 		super(schemeService);
-		this.tableService = tableService;
-		this.remoteMenuService = remoteMenuService;
 	}
 
 	/**
@@ -101,14 +90,8 @@ public class SchemeResource extends DataVoResource<SchemeService, SchemeDataVo> 
 	@PostMapping("/gen-menu")
 	@PreAuthorize("@pms.hasPermission('gen_scheme_menu')")
 	public ResponseEntity genMenu(@Valid @RequestBody SchemeGenDataVo schemeGenDataVo) {
-		SchemeDataVo schemeDataVo = service.findOneVo(schemeGenDataVo.getId());
-		TableDataVo tableDataVo = schemeDataVo.getTableDataVo();
-		if (tableDataVo == null) {
-			tableDataVo = tableService.findOneVo(schemeDataVo.getTableId());
-		}
-		String url = StringUtil.toAppendStr("/", StringUtil.lowerCase(schemeDataVo.getModuleName()), (StringUtil.isNotBlank(schemeDataVo.getSubModuleName()) ? "/" + StringUtil.lowerCase(schemeDataVo.getSubModuleName()) : ""), "/",
-			StringUtil.toRevertCamelCase(StringUtil.lowerFirst(tableDataVo.getClassName()), CharUtil.DASHED), "/");
-		remoteMenuService.saveByGenScheme(new GenSchemeDataVo(schemeDataVo.getName(), schemeGenDataVo.getParentMenuId(), url, tableDataVo.getClassName()), SecurityConstants.FROM_IN);
+		SchemeDataVo schemeDataVo = service.genMenu(schemeGenDataVo);
+
 		return ResultBuilder.buildOk("生成", schemeDataVo.getName(), "菜单成功");
 	}
 

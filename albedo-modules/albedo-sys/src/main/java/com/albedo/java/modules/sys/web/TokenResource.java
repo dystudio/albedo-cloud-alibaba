@@ -19,8 +19,9 @@ package com.albedo.java.modules.sys.web;
 import com.albedo.java.common.core.constant.CommonConstants;
 import com.albedo.java.common.core.constant.SecurityConstants;
 import com.albedo.java.common.core.util.R;
-import com.albedo.java.modules.sys.feign.RemoteTokenService;
+import com.albedo.java.modules.sys.dubbo.RemoteTokenService;
 import lombok.AllArgsConstructor;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,10 +33,11 @@ import java.util.Map;
  * getTokenPage 管理
  */
 @RestController
-@AllArgsConstructor
 @RequestMapping("/token")
 public class TokenResource {
-	private final RemoteTokenService remoteTokenService;
+
+	@Reference(check = false)
+	private RemoteTokenService remoteTokenService;
 
 	/**
 	 * 分页token 信息
@@ -45,7 +47,7 @@ public class TokenResource {
 	 */
 	@GetMapping("/")
 	public R token(@RequestParam Map<String, Object> params) {
-		return remoteTokenService.getTokenPage(params, SecurityConstants.FROM_IN);
+		return remoteTokenService.getTokenPage(params);
 	}
 
 	/**
@@ -57,6 +59,6 @@ public class TokenResource {
 	@DeleteMapping(CommonConstants.URL_IDS_REGEX)
 	@PreAuthorize("@pms.hasPermission('sys_token_del')")
 	public R<Boolean> delete(@PathVariable String ids) {
-		return remoteTokenService.removeToken(ids, SecurityConstants.FROM_IN);
+		return remoteTokenService.removeToken(ids);
 	}
 }

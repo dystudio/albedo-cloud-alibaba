@@ -21,7 +21,6 @@ import com.albedo.java.common.core.vo.PageModel;
 import com.albedo.java.common.log.annotation.Log;
 import com.albedo.java.common.log.enums.BusinessType;
 import com.albedo.java.common.persistence.DynamicSpecifications;
-import com.albedo.java.common.security.annotation.Inner;
 import com.albedo.java.common.util.ExcelUtil;
 import com.albedo.java.modules.sys.domain.LogOperate;
 import com.albedo.java.modules.sys.service.LogOperateService;
@@ -29,8 +28,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 /**
  * <p>
@@ -48,18 +45,7 @@ public class LogOperateResource {
 
 
 
-	/**
-	 * 保存操作日志
-	 *
-	 * @param logOperate
-	 * @return
-	 */
-	@Inner
-	@PostMapping("/")
-	public R save(@Valid @RequestBody  LogOperate logOperate) {
-		logOperateService.save(logOperate);
-		return R.buildOk("操作成功");
-	}
+
 
 
 	/**

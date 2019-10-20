@@ -22,10 +22,10 @@ import com.albedo.java.common.core.util.StringUtil;
 import com.albedo.java.common.core.vo.SelectResult;
 import com.albedo.java.common.persistence.service.impl.TreeVoServiceImpl;
 import com.albedo.java.modules.sys.domain.Dict;
+import com.albedo.java.modules.sys.domain.vo.DictDataVo;
 import com.albedo.java.modules.sys.repository.DictRepository;
 import com.albedo.java.modules.sys.service.DictService;
 import com.albedo.java.modules.sys.util.DictUtil;
-import com.albedo.java.modules.sys.domain.vo.DictDataVo;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
@@ -79,6 +79,4 @@ public class DictServiceImpl extends
 			cache.put(Dict.CACHE_DICT_ALL, dictList);
 		}
 	}
-
-
 }

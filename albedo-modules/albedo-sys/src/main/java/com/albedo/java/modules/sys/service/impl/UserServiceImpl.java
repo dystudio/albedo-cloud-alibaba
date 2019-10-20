@@ -16,6 +16,7 @@
 
 package com.albedo.java.modules.sys.service.impl;
 
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.util.ArrayUtil;
 import com.albedo.java.common.core.constant.CommonConstants;
 import com.albedo.java.common.core.exception.RuntimeMsgException;
@@ -27,6 +28,7 @@ import com.albedo.java.common.persistence.service.impl.DataVoServiceImpl;
 import com.albedo.java.common.security.util.SecurityUtil;
 import com.albedo.java.modules.sys.domain.*;
 import com.albedo.java.modules.sys.domain.vo.*;
+import com.albedo.java.modules.sys.dubbo.RemoteUserService;
 import com.albedo.java.modules.sys.repository.UserRepository;
 import com.albedo.java.modules.sys.service.*;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
@@ -237,5 +239,15 @@ public class UserServiceImpl extends DataVoServiceImpl<UserRepository, User, Str
 			.stream()
 			.map(DeptRelation::getDescendant)
 			.collect(Collectors.toList());
+	}
+
+	@Override
+	public UserInfo getUserInfo(String username) {
+
+		User user = super.getOne(Wrappers.<User>query()
+			.lambda().eq(User::getUsername, username));
+
+		Assert.isTrue(user != null, String.format("用户信息为空 %s", username));
+		return getUserInfo(user);
 	}
 }

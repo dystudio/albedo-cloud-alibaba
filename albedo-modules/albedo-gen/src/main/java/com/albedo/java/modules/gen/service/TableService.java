@@ -41,4 +41,6 @@ public interface TableService extends DataVoService<TableRepository, Table, Stri
 	Map<String, Object> findFormData(TableFormVo tableFormVo);
 
 	void delete(List<String> ids, String currentAuditor);
+
+	List<Table> findAllByParentTable(String id);
 }

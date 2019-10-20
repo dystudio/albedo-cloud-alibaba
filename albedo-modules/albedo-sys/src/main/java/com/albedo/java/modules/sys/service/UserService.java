@@ -19,11 +19,11 @@ package com.albedo.java.modules.sys.service;
 import com.albedo.java.common.core.vo.PageModel;
 import com.albedo.java.common.persistence.service.DataVoService;
 import com.albedo.java.modules.sys.domain.User;
-import com.albedo.java.modules.sys.domain.vo.UserVo;
-import com.albedo.java.modules.sys.repository.UserRepository;
 import com.albedo.java.modules.sys.domain.vo.UserDataVo;
 import com.albedo.java.modules.sys.domain.vo.UserExcelVo;
 import com.albedo.java.modules.sys.domain.vo.UserInfo;
+import com.albedo.java.modules.sys.domain.vo.UserVo;
+import com.albedo.java.modules.sys.repository.UserRepository;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import java.util.List;
@@ -41,6 +41,13 @@ public interface UserService extends DataVoService<UserRepository, User, String,
 	 */
 	UserInfo getUserInfo(User user);
 
+	/**
+	 * 查询用户信息
+	 *
+	 * @param username 用户
+	 * @return userInfo
+	 */
+	UserInfo getUserInfo(String username);
 	/**
 	 * 分页查询用户信息（含有角色信息）
 	 *
