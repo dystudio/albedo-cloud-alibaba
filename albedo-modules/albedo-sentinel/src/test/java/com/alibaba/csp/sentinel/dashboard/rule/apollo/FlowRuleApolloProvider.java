@@ -35,27 +35,27 @@ import java.util.List;
 @Component("flowRuleApolloProvider")
 public class FlowRuleApolloProvider implements DynamicRuleProvider<List<FlowRuleEntity>> {
 
-    @Autowired
-    private ApolloOpenApiClient apolloOpenApiClient;
-    @Autowired
-    private Converter<String, List<FlowRuleEntity>> converter;
+	@Autowired
+	private ApolloOpenApiClient apolloOpenApiClient;
+	@Autowired
+	private Converter<String, List<FlowRuleEntity>> converter;
 
-    @Override
-    public List<FlowRuleEntity> getRules(String appName) throws Exception {
-        String appId = "appId";
-        String flowDataId = ApolloConfigUtil.getFlowDataId(appName);
-        OpenNamespaceDTO openNamespaceDTO = apolloOpenApiClient.getNamespace(appId, "DEV", "default", "application");
-        String rules = openNamespaceDTO
-            .getItems()
-            .stream()
-            .filter(p -> p.getKey().equals(flowDataId))
-            .map(OpenItemDTO::getValue)
-            .findFirst()
-            .orElse("");
+	@Override
+	public List<FlowRuleEntity> getRules(String appName) throws Exception {
+		String appId = "appId";
+		String flowDataId = ApolloConfigUtil.getFlowDataId(appName);
+		OpenNamespaceDTO openNamespaceDTO = apolloOpenApiClient.getNamespace(appId, "DEV", "default", "application");
+		String rules = openNamespaceDTO
+			.getItems()
+			.stream()
+			.filter(p -> p.getKey().equals(flowDataId))
+			.map(OpenItemDTO::getValue)
+			.findFirst()
+			.orElse("");
 
-        if (StringUtil.isEmpty(rules)) {
-            return new ArrayList<>();
-        }
-        return converter.convert(rules);
-    }
+		if (StringUtil.isEmpty(rules)) {
+			return new ArrayList<>();
+		}
+		return converter.convert(rules);
+	}
 }

@@ -33,18 +33,18 @@ import java.util.List;
 @Component("flowRuleNacosProvider")
 public class FlowRuleNacosProvider implements DynamicRuleProvider<List<FlowRuleEntity>> {
 
-    @Autowired
-    private ConfigService configService;
-    @Autowired
-    private Converter<String, List<FlowRuleEntity>> converter;
+	@Autowired
+	private ConfigService configService;
+	@Autowired
+	private Converter<String, List<FlowRuleEntity>> converter;
 
-    @Override
-    public List<FlowRuleEntity> getRules(String appName) throws Exception {
-        String rules = configService.getConfig(appName + NacosConfigUtil.FLOW_DATA_ID_POSTFIX,
-            NacosConfigUtil.GROUP_ID, 3000);
-        if (StringUtil.isEmpty(rules)) {
-            return new ArrayList<>();
-        }
-        return converter.convert(rules);
-    }
+	@Override
+	public List<FlowRuleEntity> getRules(String appName) throws Exception {
+		String rules = configService.getConfig(appName + NacosConfigUtil.FLOW_DATA_ID_POSTFIX,
+			NacosConfigUtil.GROUP_ID, 3000);
+		if (StringUtil.isEmpty(rules)) {
+			return new ArrayList<>();
+		}
+		return converter.convert(rules);
+	}
 }

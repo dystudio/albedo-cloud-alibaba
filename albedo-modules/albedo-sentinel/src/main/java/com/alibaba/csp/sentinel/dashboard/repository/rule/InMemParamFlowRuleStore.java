@@ -28,23 +28,23 @@ import java.util.concurrent.atomic.AtomicLong;
 @Component
 public class InMemParamFlowRuleStore extends InMemoryRuleRepositoryAdapter<ParamFlowRuleEntity> {
 
-    private static AtomicLong ids = new AtomicLong(0);
+	private static AtomicLong ids = new AtomicLong(0);
 
-    @Override
-    protected long nextId() {
-        return ids.incrementAndGet();
-    }
+	@Override
+	protected long nextId() {
+		return ids.incrementAndGet();
+	}
 
-    @Override
-    protected ParamFlowRuleEntity preProcess(ParamFlowRuleEntity entity) {
-        if (entity != null && entity.isClusterMode()) {
-            ParamFlowClusterConfig config = entity.getClusterConfig();
-            if (config == null) {
-                config = new ParamFlowClusterConfig();
-            }
-            // Set cluster rule id.
-            config.setFlowId(entity.getId());
-        }
-        return entity;
-    }
+	@Override
+	protected ParamFlowRuleEntity preProcess(ParamFlowRuleEntity entity) {
+		if (entity != null && entity.isClusterMode()) {
+			ParamFlowClusterConfig config = entity.getClusterConfig();
+			if (config == null) {
+				config = new ParamFlowClusterConfig();
+			}
+			// Set cluster rule id.
+			config.setFlowId(entity.getId());
+		}
+		return entity;
+	}
 }

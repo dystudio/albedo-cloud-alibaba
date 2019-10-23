@@ -16,39 +16,20 @@
 
 package com.albedo.java.auth.endpoint;
 
-import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import com.albedo.java.common.core.constant.SecurityConstants;
 import com.albedo.java.common.core.util.R;
-import com.albedo.java.common.core.util.StringUtil;
-import com.albedo.java.common.security.annotation.Inner;
-import com.albedo.java.common.security.service.UserDetail;
 import com.albedo.java.modules.sys.component.RemoteServiceComponent;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.google.common.collect.Lists;
 import lombok.AllArgsConstructor;
-import org.apache.dubbo.config.annotation.Service;
-import org.springframework.data.redis.core.ConvertingCursor;
-import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ScanOptions;
-import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2RefreshToken;
-import org.springframework.security.oauth2.common.util.OAuth2Utils;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author somowhere
@@ -59,12 +40,7 @@ import java.util.Map;
 @AllArgsConstructor
 @RequestMapping("/token")
 public class AlbedoTokenEndpoint {
-	private static final String PROJECT_OAUTH_ACCESS = SecurityConstants.PROJECT_PREFIX + SecurityConstants.OAUTH_PREFIX + "access:";
-	private static final String CURRENT = "current";
-	private static final String SIZE = "size";
 	private final TokenStore tokenStore;
-	private final RedisTemplate redisTemplate;
-	private final RemoteServiceComponent remoteServiceComponent;
 
 	/**
 	 * 退出并删除tokenF

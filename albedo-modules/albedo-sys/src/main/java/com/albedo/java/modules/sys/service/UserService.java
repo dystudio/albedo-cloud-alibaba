@@ -48,6 +48,7 @@ public interface UserService extends DataVoService<UserRepository, User, String,
 	 * @return userInfo
 	 */
 	UserInfo getUserInfo(String username);
+
 	/**
 	 * 分页查询用户信息（含有角色信息）
 	 *

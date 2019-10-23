@@ -17,17 +17,12 @@
 package com.albedo.java.modules.sys.service.remote.impl;
 
 import com.albedo.java.common.core.util.Json;
-import com.albedo.java.common.core.util.R;
 import com.albedo.java.modules.sys.domain.Dict;
-import com.albedo.java.modules.sys.domain.vo.UserInfo;
 import com.albedo.java.modules.sys.dubbo.RemoteDictService;
-import com.albedo.java.modules.sys.dubbo.RemoteUserService;
 import com.albedo.java.modules.sys.service.DictService;
-import com.albedo.java.modules.sys.service.UserService;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

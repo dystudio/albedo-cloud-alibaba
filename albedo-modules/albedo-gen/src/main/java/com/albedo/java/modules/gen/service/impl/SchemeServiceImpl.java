@@ -216,7 +216,7 @@ public class SchemeServiceImpl extends DataVoServiceImpl<SchemeRepository, Schem
 			StringUtil.toRevertCamelCase(StringUtil.lowerFirst(tableDataVo.getClassName()), CharUtil.DASHED), "/");
 		remoteMenuService.saveByGenScheme(new GenSchemeDataVo(schemeDataVo.getName(),
 			schemeGenDataVo.getParentMenuId(), url, tableDataVo.getClassName()));
-		return  schemeDataVo;
+		return schemeDataVo;
 	}
 
 

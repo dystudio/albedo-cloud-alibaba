@@ -32,7 +32,6 @@ import java.util.Map;
 public class SchemeResource extends DataVoResource<SchemeService, SchemeDataVo> {
 
 
-
 	public SchemeResource(SchemeService schemeService) {
 		super(schemeService);
 	}

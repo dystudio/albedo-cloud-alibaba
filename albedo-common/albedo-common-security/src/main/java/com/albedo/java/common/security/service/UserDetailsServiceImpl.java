@@ -50,7 +50,7 @@ import java.util.Set;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-	@Reference
+	@Reference(check = false)
 	private RemoteUserService remoteUserService;
 	@Resource
 	private CacheManager cacheManager;

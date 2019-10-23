@@ -28,7 +28,6 @@ import com.albedo.java.common.persistence.service.impl.DataVoServiceImpl;
 import com.albedo.java.common.security.util.SecurityUtil;
 import com.albedo.java.modules.sys.domain.*;
 import com.albedo.java.modules.sys.domain.vo.*;
-import com.albedo.java.modules.sys.dubbo.RemoteUserService;
 import com.albedo.java.modules.sys.repository.UserRepository;
 import com.albedo.java.modules.sys.service.*;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;

@@ -32,18 +32,18 @@ import java.util.List;
 @Configuration
 public class NacosConfig {
 
-    @Bean
-    public Converter<List<FlowRuleEntity>, String> flowRuleEntityEncoder() {
-        return JSON::toJSONString;
-    }
+	@Bean
+	public Converter<List<FlowRuleEntity>, String> flowRuleEntityEncoder() {
+		return JSON::toJSONString;
+	}
 
-    @Bean
-    public Converter<String, List<FlowRuleEntity>> flowRuleEntityDecoder() {
-        return s -> JSON.parseArray(s, FlowRuleEntity.class);
-    }
+	@Bean
+	public Converter<String, List<FlowRuleEntity>> flowRuleEntityDecoder() {
+		return s -> JSON.parseArray(s, FlowRuleEntity.class);
+	}
 
-    @Bean
-    public ConfigService nacosConfigService() throws Exception {
-        return ConfigFactory.createConfigService("localhost");
-    }
+	@Bean
+	public ConfigService nacosConfigService() throws Exception {
+		return ConfigFactory.createConfigService("localhost");
+	}
 }

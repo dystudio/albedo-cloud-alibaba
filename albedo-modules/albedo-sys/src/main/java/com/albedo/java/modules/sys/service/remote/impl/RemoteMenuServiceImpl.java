@@ -39,6 +39,6 @@ public class RemoteMenuServiceImpl implements RemoteMenuService {
 	@Override
 	public boolean saveByGenScheme(GenSchemeDataVo schemeDataVo) {
 
-	return menuService.saveByGenScheme(schemeDataVo);
+		return menuService.saveByGenScheme(schemeDataVo);
 	}
 }

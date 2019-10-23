@@ -44,10 +44,6 @@ public class LogOperateResource {
 	private final LogOperateService logOperateService;
 
 
-
-
-
-
 	/**
 	 * 简单分页查询
 	 *

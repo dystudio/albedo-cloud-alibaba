@@ -235,6 +235,7 @@ public class MenuServiceImpl extends
 			}).collect(Collectors.toList());
 		return TreeUtil.buildByLoop(treeList, Menu.ROOT);
 	}
+
 	@Override
 	@CacheEvict(value = "menu_details", allEntries = true)
 	public void sortUpdate(MenuDataSortVo menuDataSortVo) {

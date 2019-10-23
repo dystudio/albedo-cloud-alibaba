@@ -21,7 +21,6 @@ import cn.hutool.core.util.StrUtil;
 import com.albedo.java.common.core.constant.SecurityConstants;
 import com.albedo.java.common.core.util.R;
 import com.albedo.java.common.core.util.StringUtil;
-import com.albedo.java.common.security.annotation.Inner;
 import com.albedo.java.common.security.service.UserDetail;
 import com.albedo.java.modules.sys.dubbo.RemoteTokenService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -41,7 +40,6 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,9 +65,7 @@ public class RemoteTokenServiceImpl implements RemoteTokenService {
 	 *
 	 * @param tokens tokens
 	 */
-	@Inner
-	@DeleteMapping("/{tokens}")
-	public R<Boolean> removeToken(@PathVariable("tokens") String tokens) {
+	public R<Boolean> removeToken(String tokens) {
 		Lists.newArrayList(tokens.split(StringUtil.SPLIT_DEFAULT)).forEach(
 			token -> redisTemplate.delete(PROJECT_OAUTH_ACCESS + token));
 		return R.buildOk("操作成功");
@@ -81,9 +77,7 @@ public class RemoteTokenServiceImpl implements RemoteTokenService {
 	 *
 	 * @param params 分页参数
 	 */
-	@Inner
-	@PostMapping("/page")
-	public R getTokenPage(@RequestBody Map<String, Object> params) {
+	public R getTokenPage(Map<String, Object> params) {
 
 		List<Map<String, String>> list = new ArrayList<>();
 		if (StringUtils.isEmpty(MapUtil.getInt(params, CURRENT)) || StringUtils.isEmpty(MapUtil.getInt(params, SIZE))) {

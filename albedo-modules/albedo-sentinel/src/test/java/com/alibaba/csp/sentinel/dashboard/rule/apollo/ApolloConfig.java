@@ -31,23 +31,23 @@ import java.util.List;
 @Configuration
 public class ApolloConfig {
 
-    @Bean
-    public Converter<List<FlowRuleEntity>, String> flowRuleEntityEncoder() {
-        return JSON::toJSONString;
-    }
+	@Bean
+	public Converter<List<FlowRuleEntity>, String> flowRuleEntityEncoder() {
+		return JSON::toJSONString;
+	}
 
-    @Bean
-    public Converter<String, List<FlowRuleEntity>> flowRuleEntityDecoder() {
-        return s -> JSON.parseArray(s, FlowRuleEntity.class);
-    }
+	@Bean
+	public Converter<String, List<FlowRuleEntity>> flowRuleEntityDecoder() {
+		return s -> JSON.parseArray(s, FlowRuleEntity.class);
+	}
 
-    @Bean
-    public ApolloOpenApiClient apolloOpenApiClient() {
-        ApolloOpenApiClient client = ApolloOpenApiClient.newBuilder()
-            .withPortalUrl("http://localhost:10034")
-            .withToken("token")
-            .build();
-        return client;
+	@Bean
+	public ApolloOpenApiClient apolloOpenApiClient() {
+		ApolloOpenApiClient client = ApolloOpenApiClient.newBuilder()
+			.withPortalUrl("http://localhost:10034")
+			.withToken("token")
+			.build();
+		return client;
 
-    }
+	}
 }

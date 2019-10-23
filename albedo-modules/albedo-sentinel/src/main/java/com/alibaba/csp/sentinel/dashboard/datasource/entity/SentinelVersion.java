@@ -20,110 +20,116 @@ package com.alibaba.csp.sentinel.dashboard.datasource.entity;
  * @since 0.2.1
  */
 public class SentinelVersion {
-    private int majorVersion;
-    private int minorVersion;
-    private int fixVersion;
-    private String postfix;
-    
-    public SentinelVersion() {
-        this(0, 0, 0);
-    }
-    
-    public SentinelVersion(int major, int minor, int fix) {
-        this(major, minor, fix, null);
-    }
-    
-    public SentinelVersion(int major, int minor, int fix, String postfix) {
-        this.majorVersion = major;
-        this.minorVersion = minor;
-        this.fixVersion = fix;
-        this.postfix = postfix;
-    }
-    
-    /**
-     * 000, 000, 000
-     */
-    public int getFullVersion() {
-        return majorVersion * 1000000 + minorVersion * 1000 + fixVersion;
-    }
+	private int majorVersion;
+	private int minorVersion;
+	private int fixVersion;
+	private String postfix;
 
-    public int getMajorVersion() {
-        return majorVersion;
-    }
+	public SentinelVersion() {
+		this(0, 0, 0);
+	}
 
-    public SentinelVersion setMajorVersion(int majorVersion) {
-        this.majorVersion = majorVersion;
-        return this;
-    }
+	public SentinelVersion(int major, int minor, int fix) {
+		this(major, minor, fix, null);
+	}
 
-    public int getMinorVersion() {
-        return minorVersion;
-    }
+	public SentinelVersion(int major, int minor, int fix, String postfix) {
+		this.majorVersion = major;
+		this.minorVersion = minor;
+		this.fixVersion = fix;
+		this.postfix = postfix;
+	}
 
-    public SentinelVersion setMinorVersion(int minorVersion) {
-        this.minorVersion = minorVersion;
-        return this;
-    }
+	/**
+	 * 000, 000, 000
+	 */
+	public int getFullVersion() {
+		return majorVersion * 1000000 + minorVersion * 1000 + fixVersion;
+	}
 
-    public int getFixVersion() {
-        return fixVersion;
-    }
+	public int getMajorVersion() {
+		return majorVersion;
+	}
 
-    public SentinelVersion setFixVersion(int fixVersion) {
-        this.fixVersion = fixVersion;
-        return this;
-    }
+	public SentinelVersion setMajorVersion(int majorVersion) {
+		this.majorVersion = majorVersion;
+		return this;
+	}
 
-    public String getPostfix() {
-        return postfix;
-    }
+	public int getMinorVersion() {
+		return minorVersion;
+	}
 
-    public SentinelVersion setPostfix(String postfix) {
-        this.postfix = postfix;
-        return this;
-    }
+	public SentinelVersion setMinorVersion(int minorVersion) {
+		this.minorVersion = minorVersion;
+		return this;
+	}
 
-    public boolean greaterThan(SentinelVersion version) {
-        if (version == null) {
-            return true;
-        }
-        return getFullVersion() > version.getFullVersion();
-    }
+	public int getFixVersion() {
+		return fixVersion;
+	}
 
-    public boolean greaterOrEqual(SentinelVersion version) {
-        if (version == null) {
-            return true;
-        }
-        return getFullVersion() >= version.getFullVersion();
-    }
+	public SentinelVersion setFixVersion(int fixVersion) {
+		this.fixVersion = fixVersion;
+		return this;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+	public String getPostfix() {
+		return postfix;
+	}
 
-        SentinelVersion that = (SentinelVersion)o;
+	public SentinelVersion setPostfix(String postfix) {
+		this.postfix = postfix;
+		return this;
+	}
 
-        if (getFullVersion() != that.getFullVersion()) { return false; }
-        return postfix != null ? postfix.equals(that.postfix) : that.postfix == null;
-    }
+	public boolean greaterThan(SentinelVersion version) {
+		if (version == null) {
+			return true;
+		}
+		return getFullVersion() > version.getFullVersion();
+	}
 
-    @Override
-    public int hashCode() {
-        int result = majorVersion;
-        result = 31 * result + minorVersion;
-        result = 31 * result + fixVersion;
-        result = 31 * result + (postfix != null ? postfix.hashCode() : 0);
-        return result;
-    }
+	public boolean greaterOrEqual(SentinelVersion version) {
+		if (version == null) {
+			return true;
+		}
+		return getFullVersion() >= version.getFullVersion();
+	}
 
-    @Override
-    public String toString() {
-        return "SentinelVersion{" +
-            "majorVersion=" + majorVersion +
-            ", minorVersion=" + minorVersion +
-            ", fixVersion=" + fixVersion +
-            ", postfix='" + postfix + '\'' +
-            '}';
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		SentinelVersion that = (SentinelVersion) o;
+
+		if (getFullVersion() != that.getFullVersion()) {
+			return false;
+		}
+		return postfix != null ? postfix.equals(that.postfix) : that.postfix == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = majorVersion;
+		result = 31 * result + minorVersion;
+		result = 31 * result + fixVersion;
+		result = 31 * result + (postfix != null ? postfix.hashCode() : 0);
+		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "SentinelVersion{" +
+			"majorVersion=" + majorVersion +
+			", minorVersion=" + minorVersion +
+			", fixVersion=" + fixVersion +
+			", postfix='" + postfix + '\'' +
+			'}';
+	}
 }

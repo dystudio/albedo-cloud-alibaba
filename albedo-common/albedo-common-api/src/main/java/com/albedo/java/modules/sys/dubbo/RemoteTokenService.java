@@ -16,11 +16,9 @@
 
 package com.albedo.java.modules.sys.dubbo;
 
-import com.albedo.java.common.core.constant.SecurityConstants;
 import com.albedo.java.common.core.util.R;
-import com.alibaba.cloud.dubbo.annotation.DubboTransported;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Map;
 

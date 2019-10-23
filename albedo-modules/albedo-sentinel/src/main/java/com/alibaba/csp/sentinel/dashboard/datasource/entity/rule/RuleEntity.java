@@ -24,17 +24,17 @@ import java.util.Date;
  */
 public interface RuleEntity {
 
-    Long getId();
+	Long getId();
 
-    void setId(Long id);
+	void setId(Long id);
 
-    String getApp();
+	String getApp();
 
-    String getIp();
+	String getIp();
 
-    Integer getPort();
+	Integer getPort();
 
-    Date getGmtCreate();
-    
-    Rule toRule();
+	Date getGmtCreate();
+
+	Rule toRule();
 }

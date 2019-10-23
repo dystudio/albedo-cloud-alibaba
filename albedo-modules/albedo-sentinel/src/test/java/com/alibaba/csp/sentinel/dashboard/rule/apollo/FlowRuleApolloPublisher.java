@@ -34,34 +34,34 @@ import java.util.List;
 @Component("flowRuleApolloPublisher")
 public class FlowRuleApolloPublisher implements DynamicRulePublisher<List<FlowRuleEntity>> {
 
-    @Autowired
-    private ApolloOpenApiClient apolloOpenApiClient;
-    @Autowired
-    private Converter<List<FlowRuleEntity>, String> converter;
+	@Autowired
+	private ApolloOpenApiClient apolloOpenApiClient;
+	@Autowired
+	private Converter<List<FlowRuleEntity>, String> converter;
 
-    @Override
-    public void publish(String app, List<FlowRuleEntity> rules) throws Exception {
-        AssertUtil.notEmpty(app, "app name cannot be empty");
-        if (rules == null) {
-            return;
-        }
+	@Override
+	public void publish(String app, List<FlowRuleEntity> rules) throws Exception {
+		AssertUtil.notEmpty(app, "app name cannot be empty");
+		if (rules == null) {
+			return;
+		}
 
-        // Increase the configuration
-        String appId = "appId";
-        String flowDataId = ApolloConfigUtil.getFlowDataId(app);
-        OpenItemDTO openItemDTO = new OpenItemDTO();
-        openItemDTO.setKey(flowDataId);
-        openItemDTO.setValue(converter.convert(rules));
-        openItemDTO.setComment("Program auto-join");
-        openItemDTO.setDataChangeCreatedBy("some-operator");
-        apolloOpenApiClient.createOrUpdateItem(appId, "DEV", "default", "application", openItemDTO);
+		// Increase the configuration
+		String appId = "appId";
+		String flowDataId = ApolloConfigUtil.getFlowDataId(app);
+		OpenItemDTO openItemDTO = new OpenItemDTO();
+		openItemDTO.setKey(flowDataId);
+		openItemDTO.setValue(converter.convert(rules));
+		openItemDTO.setComment("Program auto-join");
+		openItemDTO.setDataChangeCreatedBy("some-operator");
+		apolloOpenApiClient.createOrUpdateItem(appId, "DEV", "default", "application", openItemDTO);
 
-        // Release configuration
-        NamespaceReleaseDTO namespaceReleaseDTO = new NamespaceReleaseDTO();
-        namespaceReleaseDTO.setEmergencyPublish(true);
-        namespaceReleaseDTO.setReleaseComment("Modify or add configurations");
-        namespaceReleaseDTO.setReleasedBy("some-operator");
-        namespaceReleaseDTO.setReleaseTitle("Modify or add configurations");
-        apolloOpenApiClient.publishNamespace(appId, "DEV", "default", "application", namespaceReleaseDTO);
-    }
+		// Release configuration
+		NamespaceReleaseDTO namespaceReleaseDTO = new NamespaceReleaseDTO();
+		namespaceReleaseDTO.setEmergencyPublish(true);
+		namespaceReleaseDTO.setReleaseComment("Modify or add configurations");
+		namespaceReleaseDTO.setReleasedBy("some-operator");
+		namespaceReleaseDTO.setReleaseTitle("Modify or add configurations");
+		apolloOpenApiClient.publishNamespace(appId, "DEV", "default", "application", namespaceReleaseDTO);
+	}
 }

@@ -35,45 +35,45 @@ import javax.servlet.Filter;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    private final Logger logger = LoggerFactory.getLogger(WebConfig.class);
+	private final Logger logger = LoggerFactory.getLogger(WebConfig.class);
 
-    @Autowired
-    private AuthFilter authFilter;
+	@Autowired
+	private AuthFilter authFilter;
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/resources/");
-    }
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/resources/");
+	}
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/index.htm");
-    }
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/").setViewName("forward:/index.htm");
+	}
 
-    /**
-     * Add {@link CommonFilter} to the server, this is the simplest way to use Sentinel
-     * for Web application.
-     */
-    @Bean
-    public FilterRegistrationBean sentinelFilterRegistration() {
-        FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<>();
-        registration.setFilter(new CommonFilter());
-        registration.addUrlPatterns("/*");
-        registration.setName("sentinelFilter");
-        registration.setOrder(1);
+	/**
+	 * Add {@link CommonFilter} to the server, this is the simplest way to use Sentinel
+	 * for Web application.
+	 */
+	@Bean
+	public FilterRegistrationBean sentinelFilterRegistration() {
+		FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<>();
+		registration.setFilter(new CommonFilter());
+		registration.addUrlPatterns("/*");
+		registration.setName("sentinelFilter");
+		registration.setOrder(1);
 
-        logger.info("Sentinel servlet CommonFilter registered");
+		logger.info("Sentinel servlet CommonFilter registered");
 
-        return registration;
-    }
+		return registration;
+	}
 
-    @Bean
-    public FilterRegistrationBean authenticationFilterRegistration() {
-        FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<>();
-        registration.setFilter(authFilter);
-        registration.addUrlPatterns("/*");
-        registration.setName("authenticationFilter");
-        registration.setOrder(0);
-        return registration;
-    }
+	@Bean
+	public FilterRegistrationBean authenticationFilterRegistration() {
+		FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<>();
+		registration.setFilter(authFilter);
+		registration.addUrlPatterns("/*");
+		registration.setName("authenticationFilter");
+		registration.setOrder(0);
+		return registration;
+	}
 }
