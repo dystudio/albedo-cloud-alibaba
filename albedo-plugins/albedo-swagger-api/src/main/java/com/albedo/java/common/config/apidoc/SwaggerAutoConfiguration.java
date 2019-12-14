@@ -41,7 +41,6 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @ConditionalOnWebApplication
 @ConditionalOnClass({ApiInfo.class, BeanValidatorPluginsConfiguration.class,
 	Servlet.class})
-@Profile({"swagger"})
 @AutoConfigureAfter({ApplicationSwaggerProperties.class})
 @EnableSwagger2
 @Import({BeanValidatorPluginsConfiguration.class})

@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
  */
 @Component
 @Primary
-@Profile("swagger")
 @AllArgsConstructor
 public class RegistrySwaggerResourcesProvider implements SwaggerResourcesProvider {
 

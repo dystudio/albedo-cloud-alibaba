@@ -43,11 +43,11 @@ public class SwaggerUiHandler implements HandlerFunction<ServerResponse> {
 	private UiConfiguration uiConfiguration;
 
 	@Override
-	public Mono<ServerResponse> handle(ServerRequest serverRequest) {
-		return ServerResponse
-			.status(HttpStatus.OK)
-			.contentType(MediaType.APPLICATION_JSON_UTF8)
-			.body(BodyInserters.fromObject(Optional.ofNullable(uiConfiguration)
-				.orElse(UiConfigurationBuilder.builder().build())));
+	public Mono<ServerResponse> handle(ServerRequest request) {
+		return ServerResponse.status(HttpStatus.OK)
+			.contentType(MediaType.APPLICATION_JSON)
+			.body(BodyInserters.fromValue(
+				Optional.ofNullable(uiConfiguration)
+					.orElse(UiConfigurationBuilder.builder().build())));
 	}
 }

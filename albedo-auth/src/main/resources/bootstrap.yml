@@ -1,64 +1,17 @@
 server:
   port: 3000
 
-logging:
-  level:
-    ROOT: ${logback.loglevel}
-    com.albedo.java: DEBUG
-
-# 暴露监控端点
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-
 spring:
   application:
-    name: albedo-auth
-  profiles:
-    # The commented value for `active` can be replaced with valid Spring profiles to load.
-    # Otherwise, it will be filled in by maven when building the WAR file
-    # Either way, it can be overridden by `--spring.profiles.active` value passed in the commandline or `-Dspring.profiles.active` set in `JAVA_OPTS`
-    active: ${spring.profiles.active}
-  # 配置中心
+    name: @artifactId@
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: ${NACOS-HOST:albedo-register}:${NACOS-PORT:8848}
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
-  main:
-    allow-bean-definition-overriding: true
+        shared-dataids: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+  profiles:
+    active: @spring.profiles.active@
 
-
-
----
-
-# 开发配置
-spring:
-  profiles: dev
-
-  cloud:
-    nacos:
-      config:
-        ext-config:
-          - data-id: application-dev.yml
-            refresh: true
-          - data-id: application-swagger.yml
-            refresh: true
-
----
-# 生产配置
-spring:
-  profiles: prod
-
-  cloud:
-    nacos:
-      config:
-        ext-config:
-          - data-id: application-prod.yml
-            refresh: true
-          - data-id: application-swagger.yml
-            refresh: true

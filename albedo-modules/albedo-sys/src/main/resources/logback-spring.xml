@@ -40,7 +40,7 @@
 	<appender name="debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${application.logPath}/debug.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<fileNamePattern>${application.logPath}/%d{yyyy-MM, aux}/debug.%d{yyyy-MM-dd}.%i.logOperate.gz</fileNamePattern>
+			<fileNamePattern>${application.logPath}/%d{yyyy-MM, aux}/debug.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
 			<maxFileSize>50MB</maxFileSize>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -53,7 +53,7 @@
 	<appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${application.logPath}/error.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<fileNamePattern>${application.logPath}/%d{yyyy-MM}/error.%d{yyyy-MM-dd}.%i.logOperate.gz</fileNamePattern>
+			<fileNamePattern>${application.logPath}/%d{yyyy-MM}/error.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
 			<maxFileSize>50MB</maxFileSize>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
@@ -68,7 +68,7 @@
 	<logger name="com.alibaba.nacos" level="WARN"/>
 	<logger name="org.springframework" level="INFO"/>
 	<!-- Level: FATAL 0  ERROR 3  WARN 4  INFO 6  DEBUG 7 -->
-	<root level="DEBUG">
+	<root level="INFO">
 		<appender-ref ref="console"/>
 		<appender-ref ref="debug"/>
 		<appender-ref ref="error"/>

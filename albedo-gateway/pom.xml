@@ -21,7 +21,7 @@
 	<parent>
 		<groupId>com.albedo.java</groupId>
 		<artifactId>albedo-cloud-alibaba</artifactId>
-		<version>2.0.0-SNAPSHOT</version>
+		<version>2.1.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>albedo-gateway</artifactId>
@@ -98,10 +98,10 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<!-- logOperate configuration -->
-				<logback.loglevel>${profile.dev.logOperate.level}</logback.loglevel>
+				<!--  log configuration -->
+				<logback.loglevel>${profile.dev.log.level}</logback.loglevel>
 				<!-- default Spring profiles -->
-				<spring.profiles.active>dev,swagger</spring.profiles.active>
+				<spring.profiles.active>dev</spring.profiles.active>
 			</properties>
 		</profile>
 	</profiles>

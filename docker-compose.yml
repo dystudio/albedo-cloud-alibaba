@@ -80,12 +80,3 @@ services:
     hostname: albedo-gen
     image: albedo-gen
 
-  albedo-zipkin:
-    build:
-      context: ./
-      dockerfile: ./albedo-visual/albedo-zipkin/Dockerfile
-    restart: always
-    image: albedo-zipkin
-    container_name: albedo-zipkin
-    ports:
-      - 5002:5002

@@ -49,7 +49,7 @@ public class SqlInjectorUtil {
 				size = fieldList.size();
 			}
 
-			if (StringUtils.isNotEmpty(table.getKeyProperty())) {
+			if (StringUtils.isNotBlank(table.getKeyProperty())) {
 				if (StringUtil.isNotEmpty(columnPrefix)) {
 					columns.append('`').append(columnPrefix).append("`.");
 				}
@@ -96,7 +96,7 @@ public class SqlInjectorUtil {
 
 	public static String parseSql(MapperBuilderAssistant builderAssistant,
 								  SqlCustomMethod sqlMethod, Class<?> modelClass, TableInfo tableInfo, String sqlWhereEntityWrapper) {
-		String tableNameAlias = StringUtil.lowerCase(modelClass.getSimpleName()), tempNameAlias;
+		String tableNameAlias = StringUtil.lowerCase(modelClass.getSimpleName());
 		TableInfo tableAlias;
 		PropertyDescriptor[] ps = BeanVoUtil.getPropertyDescriptors(modelClass);
 		StringBuffer sbSelectCoumns = new StringBuffer(SqlInjectorUtil.sqlSelectColumns(tableInfo, false, tableNameAlias, null)),

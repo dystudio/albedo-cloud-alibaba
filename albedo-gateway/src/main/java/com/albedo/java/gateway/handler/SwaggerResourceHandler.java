@@ -40,10 +40,9 @@ public class SwaggerResourceHandler implements HandlerFunction<ServerResponse> {
 	private final SwaggerResourcesProvider swaggerResourcesProvider;
 
 	@Override
-	public Mono<ServerResponse> handle(ServerRequest serverRequest) {
-		return ServerResponse
-			.status(HttpStatus.OK)
-			.contentType(MediaType.APPLICATION_JSON_UTF8)
-			.body(BodyInserters.fromObject(swaggerResourcesProvider.get()));
+	public Mono<ServerResponse> handle(ServerRequest request) {
+		return ServerResponse.status(HttpStatus.OK)
+			.contentType(MediaType.APPLICATION_JSON)
+			.body(BodyInserters.fromValue(swaggerResourcesProvider.get()));
 	}
 }
