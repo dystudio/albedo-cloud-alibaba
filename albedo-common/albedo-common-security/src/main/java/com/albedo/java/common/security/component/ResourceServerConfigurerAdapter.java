@@ -50,8 +50,6 @@ public class ResourceServerConfigurerAdapter extends org.springframework.securit
 	private AccessDeniedHandler pigAccessDeniedHandler;
 	@Autowired
 	private RestTemplate lbRestTemplate;
-	@Autowired
-	private ApplicationProperties applicationProperties;
 
 	/**
 	 * 默认的配置，对外暴露

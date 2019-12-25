@@ -73,8 +73,6 @@ public class RoleResourceIntTest {
 	private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 	@Autowired
 	private GlobalExceptionHandler globalExceptionHandler;
-	@Autowired
-	private ApplicationProperties applicationProperties;
 
 	private RoleDataVo roleDataVo;
 

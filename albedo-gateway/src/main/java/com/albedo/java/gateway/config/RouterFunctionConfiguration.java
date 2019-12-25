@@ -41,7 +41,6 @@ public class RouterFunctionConfiguration {
 	private final SwaggerResourceHandler swaggerResourceHandler;
 	private final SwaggerSecurityHandler swaggerSecurityHandler;
 	private final SwaggerUiHandler swaggerUiHandler;
-	private final ApplicationProperties applicationProperties;
 
 	@Bean
 	public RouterFunction routerFunction() {

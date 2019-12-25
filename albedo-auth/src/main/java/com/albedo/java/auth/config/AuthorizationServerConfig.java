@@ -55,7 +55,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private final UserDetailsService userDetailsService;
 	private final AuthenticationManager authenticationManager;
 	private final RedisConnectionFactory redisConnectionFactory;
-	private final ApplicationProperties applicationProperties;
 
 	@Override
 	@SneakyThrows

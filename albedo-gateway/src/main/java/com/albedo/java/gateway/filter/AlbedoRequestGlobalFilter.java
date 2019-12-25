@@ -47,9 +47,6 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.a
 @AllArgsConstructor
 public class AlbedoRequestGlobalFilter implements GlobalFilter, Ordered {
 
-	private final ApplicationProperties applicationProperties;
-	private final FilterIgnoreProperties filterIgnoreProperties;
-
 	/**
 	 * Process the Web request and (optionally) delegate to the next
 	 * {@code WebFilter} through the given {@link GatewayFilterChain}.

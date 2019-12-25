@@ -1,9 +1,6 @@
 package com.albedo.java.modules.sys.util;
 
-import com.albedo.java.common.core.config.ApplicationProperties;
-import com.albedo.java.common.core.util.Json;
 import com.albedo.java.common.core.util.SpringContextHolder;
-import com.albedo.java.common.core.util.StringUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
@@ -23,115 +20,10 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class RedisUtil {
 
-	public static final String KEY_PREFIX = SpringContextHolder.getBean(ApplicationProperties.class).getJedisKeyPrefix();
-	/*** 系统 缓存 */
-	private static final String CACHE_SYS = "systemJedisCache";
-	/*** 用户 缓存 */
-	private static final String CACHE_USER = "userJedisCache";
-
 	public static RedisTemplate redisTemplate = SpringContextHolder.getBean("redisTemplate");
 	public static StringRedisTemplate stringRedisTemplate = SpringContextHolder.getBean("stringRedisTemplate");
 
-	public static StringRedisTemplate getStringRedisTemplate() {
-		return stringRedisTemplate;
-	}
 
-	public static String getKey(String key) {
-		return StringUtil.toAppendStr(KEY_PREFIX, key);
-	}
-
-	public static String getNormalKey(String key) {
-		return StringUtil.isNotEmpty(key) ? key.replace(KEY_PREFIX, "") : key;
-	}
-
-	public static String getUserStr(String key) {
-		return StringUtil.toStrString(get(CACHE_USER, key));
-	}
-
-	public static Object getUser(String key) {
-		return get(CACHE_USER, key);
-	}
-
-	public static void setUser(String key, Object value) {
-		putNormal(CACHE_USER, key, value);
-	}
-
-	public static void putUser(String key, Object value) {
-		put(CACHE_USER, key, value);
-		// MemcacheUtil.set(T, value);
-	}
-
-	/**
-	 * 清空指定Key的系统缓存对象
-	 *
-	 * @param key
-	 */
-	public static void removeUser(String key) {
-		remove(CACHE_USER, key);
-		// MemcacheUtil.delete(T);
-	}
-
-	public static Object getSys(String key) {
-		// return MemcacheUtil.get(T);
-		return get(CACHE_SYS, key);
-	}
-
-	public static void putSys(String key, Object value) {
-		put(CACHE_SYS, key, value);
-		// MemcacheUtil.set(T, value);
-	}
-
-	/**
-	 * 清空指定Key的系统缓存对象
-	 *
-	 * @param key
-	 */
-	public static void removeSys(String key) {
-		remove(CACHE_SYS, key);
-		// MemcacheUtil.delete(T);
-	}
-
-	/**
-	 * 清空所有系统缓存
-	 */
-	public static void clearAllCacheSys() {
-		removeCache(CACHE_SYS);
-		removeCache(CACHE_USER);
-	}
-
-
-	public static <T> T getJson(String cacheName, String key, Class<T> clazz) {
-		String value = StringUtil.toStrString(redisTemplate.opsForHash().get(cacheName, getKey(key)));
-		return Json.parseObject(value, clazz);
-	}
-
-	public static Object get(String cacheName, String key) {
-		return getNormal(cacheName, getKey(key));
-	}
-
-	public static void put(String cacheName, String key, Object value) {
-		putNormal(cacheName, getKey(key), value);
-	}
-
-	public static void remove(String cacheName, String key) {
-		removeNormal(cacheName, getKey(key));
-	}
-
-	public static Object getNormal(String cacheName, String key) {
-		return redisTemplate.opsForHash().get(cacheName, key);
-	}
-
-	public static void putNormal(String cacheName, String key, Object value) {
-		redisTemplate.opsForHash().put(cacheName, key, value);
-	}
-
-	public static void removeNormal(String cacheName, String key) {
-		redisTemplate.opsForHash().delete(cacheName, key);
-	}
-
-	public static void removeCache(String cacheName) {
-		redisTemplate.delete(cacheName);
-	}
 
 	/**
 	 * 缓存基本的对象，Integer、String、实体类等
